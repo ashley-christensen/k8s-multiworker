@@ -5,8 +5,8 @@ kind: Deployment
 metadata: #section with name
     name: client-deployment #object created by config file
 spec: #section
-    replicas: 5 #number of pods for deployment to create (identical in nature)
-    selector: #similar to NodePort Service config file --> deployment doesn't directly create pod, reaches out to K8s api on master, to create pod with config, master creates pod, master program creates pod ==> deployment must get handle on pod created, selector field will get handle of objects with Label of component:web
+    replicas: 1 #number of pods for deployment to create (identical in nature)
+    selector:
         matchLabels:
             component: web
     template: #template section defines exact config for =every pod
@@ -16,6 +16,6 @@ spec: #section
         spec:
             containers: #container with name of client = every pod
                 - name: client
-                  image: stephengrider/multi-worker #using image multiclient = every pod
+                  image: stephengrider/multi-client #using image multi-client = every pod
                   ports:
-                      - containerPort: 9999 #port 3000 mapped to container = every pod
+                      - containerPort: 3000 #port 3000 mapped to container = every pod
